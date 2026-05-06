@@ -4,8 +4,7 @@ This document collects the main mathematical formulas involved in the PINO-MagNa
 
 The project focuses on:
 
-$$
-
+```math
 \text{magnetic actuation}
 +
 \text{fluid dynamics}
@@ -17,8 +16,7 @@ $$
 \text{predictive control}
 +
 \text{environment inference}
-
-$$
+```
 
 ---
 
@@ -26,27 +24,21 @@ $$
 
 ## 1.1 Spatial and Temporal Variables
 
-$$
-
+```math
 \mathbf{x}\in \Omega
-
-$$
+```
 
 Spatial coordinate in the fluid domain.
 
-$$
-
+```math
 t\in[0,T]
-
-$$
+```
 
 Time.
 
-$$
-
+```math
 s\in[0,L]
-
-$$
+```
 
 Arc-length coordinate along the soft robot body.
 
@@ -54,43 +46,33 @@ Arc-length coordinate along the soft robot body.
 
 ## 1.2 Fluid Variables
 
-$$
-
+```math
 \mathbf{u}_f(\mathbf{x},t)
-
-$$
+```
 
 Fluid velocity field.
 
-$$
-
+```math
 p(\mathbf{x},t)
-
-$$
+```
 
 Pressure field.
 
-$$
-
+```math
 \rho
-
-$$
+```
 
 Fluid density.
 
-$$
-
+```math
 \mu
-
-$$
+```
 
 Dynamic viscosity.
 
-$$
-
+```math
 \nu=\frac{\mu}{\rho}
-
-$$
+```
 
 Kinematic viscosity.
 
@@ -98,75 +80,57 @@ Kinematic viscosity.
 
 ## 1.3 Robot Variables
 
-$$
-
+```math
 \mathbf{r}(s,t)
-
-$$
+```
 
 Centerline of the soft robot.
 
-$$
-
+```math
 \mathbf{c}(t)
-
-$$
+```
 
 Centroid of the robot.
 
-$$
-
+```math
 \mathbf{R}(s,t)\in SO(3)
-
-$$
+```
 
 Local orientation frame of the robot cross-section.
 
-$$
-
+```math
 \kappa(s,t)
-
-$$
+```
 
 Curvature.
 
-$$
-
+```math
 \dot{\mathbf{c}}(t)
-
-$$
+```
 
 Centroid velocity.
 
-$$
-
+```math
 \rho_s
-
-$$
+```
 
 Solid density.
 
-$$
-
+```math
 A
-
-$$
+```
 
 Cross-sectional area.
 
-$$
-
+```math
 E
-
-$$
+```
 
 Young's modulus.
 
-$$
-
+```math
 I
-
-$$
+```
 
 Second moment of area.
 
@@ -174,51 +138,39 @@ Second moment of area.
 
 ## 1.4 Magnetic Variables
 
-$$
-
+```math
 \mathbf{B}(\mathbf{x},t)
-
-$$
+```
 
 Magnetic flux density.
 
-$$
-
+```math
 \nabla \mathbf{B}(\mathbf{x},t)
-
-$$
+```
 
 Magnetic field gradient.
 
-$$
-
+```math
 \mathbf{M}
-
-$$
+```
 
 Magnetization.
 
-$$
-
+```math
 V
-
-$$
+```
 
 Magnetic material volume.
 
-$$
-
+```math
 \mathbf{F}_m
-
-$$
+```
 
 Magnetic force.
 
-$$
-
+```math
 \boldsymbol{\tau}_m
-
-$$
+```
 
 Magnetic torque.
 
@@ -226,8 +178,7 @@ Magnetic torque.
 
 ## 1.5 Control Variables
 
-$$
-
+```math
 u_t
 =
 [
@@ -238,8 +189,7 @@ B_x(t),B_y(t),B_z(t),
 \omega(t),
 \phi(t)
 ]
-
-$$
+```
 
 where:
 
@@ -256,26 +206,22 @@ where:
 
 For a magnetic body with magnetization \(\mathbf{M}\), the magnetic force can be approximated as:
 
-$$
-
+```math
 \mathbf{F}_m
 \approx
 V(\mathbf{M}\cdot\nabla)\mathbf{B}
-
-$$
+```
 
 Component-wise:
 
-$$
-
+```math
 F_{m,i}
 \approx
 V
 \sum_{j}
 M_j
 \frac{\partial B_i}{\partial x_j}
-
-$$
+```
 
 This shows that a magnetic field gradient is required to generate translational force.
 
@@ -285,13 +231,11 @@ This shows that a magnetic field gradient is required to generate translational 
 
 The magnetic torque is:
 
-$$
-
+```math
 \boldsymbol{\tau}_m
 \approx
 V\mathbf{M}\times\mathbf{B}
-
-$$
+```
 
 This torque tends to align the magnetization direction with the external magnetic field.
 
@@ -301,25 +245,21 @@ This torque tends to align the magnetization direction with the external magneti
 
 The magnetic potential energy is:
 
-$$
-
+```math
 U_m
 =
 -
 V\mathbf{M}\cdot\mathbf{B}
-
-$$
+```
 
 The torque can be derived from:
 
-$$
-
+```math
 \boldsymbol{\tau}_m
 =
 -
 \frac{\partial U_m}{\partial \boldsymbol{\theta}}
-
-$$
+```
 
 ---
 
@@ -327,34 +267,28 @@ $$
 
 The magnetic force can also be written as:
 
-$$
-
+```math
 \mathbf{F}_m
 =
 -\nabla U_m
-
-$$
+```
 
 Using:
 
-$$
-
+```math
 U_m=-V\mathbf{M}\cdot\mathbf{B}
-
-$$
+```
 
 we obtain:
 
-$$
-
+```math
 \mathbf{F}_m
 =
 \nabla
 \left(
 V\mathbf{M}\cdot\mathbf{B}
 \right)
-
-$$
+```
 
 ---
 
@@ -362,8 +296,7 @@ $$
 
 A planar rotating magnetic field can be represented as:
 
-$$
-
+```math
 \mathbf{B}(t)
 =
 B_0
@@ -372,13 +305,11 @@ B_0
 \sin(\omega t),
 0
 ]^T
-
-$$
+```
 
 A 3D rotating or conical field can be represented as:
 
-$$
-
+```math
 \mathbf{B}(t)
 =
 B_0
@@ -387,8 +318,7 @@ B_0
 \sin\alpha\sin(\omega t),
 \cos\alpha
 ]^T
-
-$$
+```
 
 where \(\alpha\) is the cone angle.
 
@@ -400,8 +330,7 @@ where \(\alpha\) is the cone angle.
 
 The incompressible Navier-Stokes equations are:
 
-$$
-
+```math
 \rho
 \left(
 \frac{\partial \mathbf{u}_f}{\partial t}
@@ -414,14 +343,11 @@ $$
 \mu\nabla^2\mathbf{u}_f
 +
 \mathbf{f}_{\text{robot}}
+```
 
-$$
-
-$$
-
+```math
 \nabla\cdot\mathbf{u}_f=0
-
-$$
+```
 
 where \(\mathbf{f}_{\text{robot}}\) represents the force density exerted by the robot on the fluid.
 
@@ -431,8 +357,7 @@ where \(\mathbf{f}_{\text{robot}}\) represents the force density exerted by the 
 
 At low Reynolds number, inertial terms can be neglected:
 
-$$
-
+```math
 0
 =
 -\nabla p
@@ -440,14 +365,11 @@ $$
 \mu\nabla^2\mathbf{u}_f
 +
 \mathbf{f}_{\text{robot}}
+```
 
-$$
-
-$$
-
+```math
 \nabla\cdot\mathbf{u}_f=0
-
-$$
+```
 
 ---
 
@@ -455,13 +377,11 @@ $$
 
 The Reynolds number is:
 
-$$
-
+```math
 Re
 =
 \frac{\rho U L}{\mu}
-
-$$
+```
 
 where:
 
@@ -472,11 +392,9 @@ where:
 
 Low Reynolds number means:
 
-$$
-
+```math
 Re\ll 1
-
-$$
+```
 
 ---
 
@@ -484,13 +402,11 @@ $$
 
 On solid walls:
 
-$$
-
+```math
 \mathbf{u}_f(\mathbf{x},t)=0,
 \quad
 \mathbf{x}\in\partial\Omega_{\text{wall}}
-
-$$
+```
 
 ---
 
@@ -498,15 +414,13 @@ $$
 
 At the inlet:
 
-$$
-
+```math
 \mathbf{u}_f(\mathbf{x},t)
 =
 \mathbf{u}_{\text{in}}(\mathbf{x},t),
 \quad
 \mathbf{x}\in\partial\Omega_{\text{in}}
-
-$$
+```
 
 ---
 
@@ -514,15 +428,13 @@ $$
 
 At the outlet:
 
-$$
-
+```math
 p(\mathbf{x},t)
 =
 p_{\text{out}},
 \quad
 \mathbf{x}\in\partial\Omega_{\text{out}}
-
-$$
+```
 
 ---
 
@@ -532,8 +444,7 @@ $$
 
 The soft robot centerline is:
 
-$$
-
+```math
 \mathbf{r}(s,t)
 =
 [
@@ -541,30 +452,25 @@ x(s,t),
 y(s,t),
 z(s,t)
 ]^T
-
-$$
+```
 
 The tangent vector is:
 
-$$
-
+```math
 \mathbf{t}(s,t)
 =
 \frac{\partial \mathbf{r}}{\partial s}
-
-$$
+```
 
 For an inextensible rod:
 
-$$
-
+```math
 \left\|
 \frac{\partial \mathbf{r}}{\partial s}
 \right\|
 =
 1
-
-$$
+```
 
 ---
 
@@ -572,15 +478,13 @@ $$
 
 The curvature is:
 
-$$
-
+```math
 \kappa(s,t)
 =
 \left\|
 \frac{\partial^2\mathbf{r}}{\partial s^2}
 \right\|
-
-$$
+```
 
 ---
 
@@ -588,8 +492,7 @@ $$
 
 The force balance equation is:
 
-$$
-
+```math
 \rho_s A
 \frac{\partial^2 \mathbf{r}}{\partial t^2}
 =
@@ -600,8 +503,7 @@ $$
 \mathbf{f}_{\text{mag}}
 +
 \mathbf{f}_{\text{contact}}
-
-$$
+```
 
 where:
 
@@ -616,8 +518,7 @@ where:
 
 The moment balance is:
 
-$$
-
+```math
 \frac{\partial \mathbf{m}}{\partial s}
 +
 \frac{\partial \mathbf{r}}{\partial s}
@@ -629,8 +530,7 @@ $$
 \boldsymbol{\tau}_{\text{mag}}
 =
 \mathbf{0}
-
-$$
+```
 
 where:
 
@@ -644,13 +544,11 @@ where:
 
 For a simple elastic rod:
 
-$$
-
+```math
 \mathbf{m}
 =
 EI\kappa\mathbf{b}
-
-$$
+```
 
 where:
 
@@ -664,16 +562,14 @@ where:
 
 The robot centerline can be approximated by shape modes:
 
-$$
-
+```math
 \mathbf{r}(s,t)
 =
 \mathbf{c}(t)
 +
 \sum_{k=1}^{K}
 a_k(t)\boldsymbol{\phi}_k(s)
-
-$$
+```
 
 where:
 
@@ -687,8 +583,7 @@ where:
 
 A compact robot state can be written as:
 
-$$
-
+```math
 x_t
 =
 [
@@ -701,8 +596,7 @@ a_2(t),
 \ldots,
 a_K(t)
 ]
-
-$$
+```
 
 ---
 
@@ -712,8 +606,7 @@ $$
 
 The robot applies force to the surrounding fluid:
 
-$$
-
+```math
 \mathbf{f}_{\text{robot}}(\mathbf{x},t)
 =
 \int_0^L
@@ -723,8 +616,7 @@ $$
 \mathbf{x}-\mathbf{r}(s,t)
 )
 ds
-
-$$
+```
 
 where \(\delta(\cdot)\) is a Dirac delta function or regularized immersed-boundary kernel.
 
@@ -734,8 +626,7 @@ where \(\delta(\cdot)\) is a Dirac delta function or regularized immersed-bounda
 
 A simplified drag model is:
 
-$$
-
+```math
 \mathbf{f}_{\text{fluid}}
 =
 -\mathbf{D}
@@ -744,8 +635,7 @@ $$
 -
 \mathbf{u}_f(\mathbf{r}(s,t),t)
 \right)
-
-$$
+```
 
 where \(\mathbf{D}\) is a drag matrix.
 
@@ -755,8 +645,7 @@ where \(\mathbf{D}\) is a drag matrix.
 
 For slender-body motion in low Reynolds number flow:
 
-$$
-
+```math
 \mathbf{f}_{\text{fluid}}
 =
 -\xi_{\parallel}
@@ -764,38 +653,31 @@ $$
 -
 \xi_{\perp}
 \mathbf{v}_{\perp}
-
-$$
+```
 
 where:
 
-$$
-
+```math
 \mathbf{v}
 =
 \frac{\partial \mathbf{r}}{\partial t}
 -
 \mathbf{u}_f(\mathbf{r}(s,t),t)
+```
 
-$$
-
-$$
-
+```math
 \mathbf{v}_{\parallel}
 =
 (\mathbf{v}\cdot\mathbf{t})\mathbf{t}
+```
 
-$$
-
-$$
-
+```math
 \mathbf{v}_{\perp}
 =
 \mathbf{v}
 -
 \mathbf{v}_{\parallel}
-
-$$
+```
 
 ---
 
@@ -805,14 +687,12 @@ $$
 
 A neural operator learns a mapping between function spaces:
 
-$$
-
+```math
 \mathcal{G}_{\theta}:
 \mathcal{A}
 \rightarrow
 \mathcal{U}
-
-$$
+```
 
 where:
 
@@ -821,8 +701,7 @@ where:
 
 In this project:
 
-$$
-
+```math
 \mathcal{G}_{\theta}
 :
 [
@@ -839,8 +718,7 @@ $$
 \mathbf{u}_{f,0:T},
 p_{0:T}
 ]
-
-$$
+```
 
 ---
 
@@ -848,8 +726,7 @@ $$
 
 The forward model is:
 
-$$
-
+```math
 \hat{Y}_{0:T}
 =
 \mathcal{G}_{\theta}
@@ -859,13 +736,11 @@ U_{0:T},
 \Omega,
 \eta
 )
-
-$$
+```
 
 where:
 
-$$
-
+```math
 \hat{Y}_{0:T}
 =
 [
@@ -874,11 +749,9 @@ $$
 \hat{\mathbf{u}}_{f,0:T},
 \hat{p}_{0:T}
 ]
+```
 
-$$
-
-$$
-
+```math
 X_0
 =
 [
@@ -886,28 +759,23 @@ X_0
 \mathbf{c}_0,
 \mathbf{u}_{f,0}
 ]
+```
 
-$$
-
-$$
-
+```math
 U_{0:T}
 =
 [
 u_0,u_1,\ldots,u_T
 ]
+```
 
-$$
-
-$$
-
+```math
 \eta
 =
 [
 \rho,\mu,E,M,V,L,A,I
 ]
-
-$$
+```
 
 ---
 
@@ -915,8 +783,7 @@ $$
 
 A generic Fourier neural operator layer can be written as:
 
-$$
-
+```math
 v_{l+1}(\mathbf{x})
 =
 \sigma
@@ -934,8 +801,7 @@ v_l
 \right)
 (\mathbf{x})
 \right)
-
-$$
+```
 
 where:
 
@@ -953,8 +819,7 @@ where:
 
 The total loss is:
 
-$$
-
+```math
 \mathcal{L}_{\mathrm{PINO}}
 =
 \lambda_d\mathcal{L}_{\mathrm{data}}
@@ -968,15 +833,13 @@ $$
 \lambda_b\mathcal{L}_{\mathrm{BC}}
 +
 \lambda_c\mathcal{L}_{\mathrm{constraint}}
-
-$$
+```
 
 ---
 
 ## 7.2 Data Loss
 
-$$
-
+```math
 \mathcal{L}_{\mathrm{data}}
 =
 \|
@@ -1002,15 +865,13 @@ $$
 -
 p^{\mathrm{true}}
 \|^2
-
-$$
+```
 
 ---
 
 ## 7.3 Fluid Residual Loss
 
-$$
-
+```math
 \mathcal{R}_{NS}
 =
 \rho
@@ -1025,11 +886,9 @@ $$
 \mu\nabla^2\hat{\mathbf{u}}_f
 -
 \hat{\mathbf{f}}_{\text{robot}}
+```
 
-$$
-
-$$
-
+```math
 \mathcal{L}_{\mathrm{fluid}}
 =
 \|
@@ -1039,8 +898,7 @@ $$
 \|
 \nabla\cdot\hat{\mathbf{u}}_f
 \|^2
-
-$$
+```
 
 ---
 
@@ -1048,8 +906,7 @@ $$
 
 For low Reynolds number flow:
 
-$$
-
+```math
 \mathcal{R}_{Stokes}
 =
 \nabla \hat{p}
@@ -1057,11 +914,9 @@ $$
 \mu\nabla^2\hat{\mathbf{u}}_f
 -
 \hat{\mathbf{f}}_{\text{robot}}
+```
 
-$$
-
-$$
-
+```math
 \mathcal{L}_{Stokes}
 =
 \|
@@ -1071,15 +926,13 @@ $$
 \|
 \nabla\cdot\hat{\mathbf{u}}_f
 \|^2
-
-$$
+```
 
 ---
 
 ## 7.5 Solid Dynamics Residual Loss
 
-$$
-
+```math
 \mathcal{R}_{solid}
 =
 \rho_s A
@@ -1092,25 +945,21 @@ $$
 \hat{\mathbf{f}}_{\text{mag}}
 -
 \hat{\mathbf{f}}_{\text{contact}}
+```
 
-$$
-
-$$
-
+```math
 \mathcal{L}_{solid}
 =
 \|
 \mathcal{R}_{solid}
 \|^2
-
-$$
+```
 
 ---
 
 ## 7.6 Magnetic Consistency Loss
 
-$$
-
+```math
 \mathcal{L}_{mag}
 =
 \|
@@ -1124,15 +973,13 @@ V(\mathbf{M}\cdot\nabla)\mathbf{B}
 -
 V\mathbf{M}\times\mathbf{B}
 \|^2
-
-$$
+```
 
 ---
 
 ## 7.7 Boundary Condition Loss
 
-$$
-
+```math
 \mathcal{L}_{BC}
 =
 \|
@@ -1152,23 +999,19 @@ $$
 -
 p_{out}
 \|^2_{\partial\Omega_{out}}
-
-$$
+```
 
 For no-slip walls:
 
-$$
-
+```math
 \mathbf{u}_{wall}=0
-
-$$
+```
 
 ---
 
 ## 7.8 Constraint Loss
 
-$$
-
+```math
 \mathcal{L}_{constraint}
 =
 \lambda_B
@@ -1182,8 +1025,7 @@ $$
 +
 \lambda_o
 \max(0,d_{\min}-d(\mathbf{c},\mathcal{O}))^2
-
-$$
+```
 
 ---
 
@@ -1193,8 +1035,7 @@ $$
 
 In a deterministic environment, a magnetic control sequence can be planned as:
 
-$$
-
+```math
 u^*_{0:T}
 =
 \arg\min_{u_{0:T}}
@@ -1207,28 +1048,24 @@ x_0,u_{0:T},\Omega,\mathbf{u}_f
 ,
 u_{0:T}
 \right)
-
-$$
+```
 
 The predicted trajectory is:
 
-$$
-
+```math
 \hat{x}_{0:T}
 =
 \mathcal{G}_{\theta}
 (
 x_0,u_{0:T},\Omega,\mathbf{u}_f
 )
-
-$$
+```
 
 ---
 
 ## 8.2 Navigation Cost Function
 
-$$
-
+```math
 J
 =
 \sum_{t=0}^{T}
@@ -1254,8 +1091,7 @@ J
 \lambda_o
 \sum_{t=0}^{T}
 \Phi_{obs}(\hat{\mathbf{c}}_t)
-
-$$
+```
 
 ---
 
@@ -1263,8 +1099,7 @@ $$
 
 A common obstacle penalty is:
 
-$$
-
+```math
 \Phi_{obs}(\mathbf{c})
 =
 \max
@@ -1272,8 +1107,7 @@ $$
 0,
 d_{safe}-d(\mathbf{c},\mathcal{O})
 )^2
-
-$$
+```
 
 where \(d(\mathbf{c},\mathcal{O})\) is the distance from the robot centroid to the obstacle set.
 
@@ -1283,8 +1117,7 @@ where \(d(\mathbf{c},\mathcal{O})\) is the distance from the robot centroid to t
 
 At time \(t\), solve:
 
-$$
-
+```math
 u^*_{t:t+H}
 =
 \arg\min_{u_{t:t+H}}
@@ -1299,13 +1132,11 @@ u_{t+k}
 (
 \hat{x}_{t+H}
 )
-
-$$
+```
 
 subject to:
 
-$$
-
+```math
 \hat{x}_{t:t+H}
 =
 \mathcal{G}_{\theta}
@@ -1316,36 +1147,27 @@ u_{t:t+H},
 \mathbf{u}_f,
 \theta_{\text{robot}}
 )
+```
 
-$$
-
-$$
-
+```math
 u_{t+k}\in\mathcal{U}
+```
 
-$$
-
-$$
-
+```math
 \hat{x}_{t+k}\in\mathcal{X}_{safe}
+```
 
-$$
-
-$$
-
+```math
 d(\hat{\mathbf{c}}_{t+k},\mathcal{O})
 \geq
 d_{\min}
-
-$$
+```
 
 Apply only:
 
-$$
-
+```math
 u_t = u_t^*
-
-$$
+```
 
 Then re-observe and repeat.
 
@@ -1355,55 +1177,45 @@ Then re-observe and repeat.
 
 Magnetic field limit:
 
-$$
-
+```math
 \|\mathbf{B}(t)\|
 \leq
 B_{\max}
-
-$$
+```
 
 Magnetic gradient limit:
 
-$$
-
+```math
 \|\nabla\mathbf{B}(t)\|
 \leq
 G_{\max}
-
-$$
+```
 
 Frequency limit:
 
-$$
-
+```math
 \omega_{\min}
 \leq
 \omega(t)
 \leq
 \omega_{\max}
-
-$$
+```
 
 Deformation limit:
 
-$$
-
+```math
 \kappa(s,t)
 \leq
 \kappa_{\max}
-
-$$
+```
 
 Obstacle clearance:
 
-$$
-
+```math
 d(\mathbf{c}_t,\mathcal{O})
 \geq
 d_{\min}
-
-$$
+```
 
 ---
 
@@ -1413,15 +1225,13 @@ $$
 
 If sensors are available:
 
-$$
-
+```math
 y_t
 =
 h(x_t)
 +
 \epsilon_t
-
-$$
+```
 
 where:
 
@@ -1436,8 +1246,7 @@ where:
 
 A general estimator is:
 
-$$
-
+```math
 \hat{x}_t
 =
 \mathcal{E}_{\psi}
@@ -1445,18 +1254,15 @@ $$
 y_{0:t},
 u_{0:t-1}
 )
-
-$$
+```
 
 For direct visual estimation:
 
-$$
-
+```math
 \hat{x}_t
 =
 \mathcal{E}_{\psi}(y_t)
-
-$$
+```
 
 ---
 
@@ -1464,8 +1270,7 @@ $$
 
 The belief update can be written as:
 
-$$
-
+```math
 p(x_t|y_{0:t},u_{0:t-1})
 \propto
 p(y_t|x_t)
@@ -1473,8 +1278,7 @@ p(y_t|x_t)
 p(x_t|x_{t-1},u_{t-1})
 p(x_{t-1}|y_{0:t-1},u_{0:t-2})
 dx_{t-1}
-
-$$
+```
 
 This formulation includes Kalman filters, extended Kalman filters, unscented Kalman filters, and particle filters as special cases.
 
@@ -1486,8 +1290,7 @@ This formulation includes Kalman filters, extended Kalman filters, unscented Kal
 
 An inverse PINO maps robot motion and magnetic inputs to hidden environmental variables:
 
-$$
-
+```math
 \mathcal{I}_{\phi}
 :
 [
@@ -1501,15 +1304,13 @@ $$
 \hat{\Omega},
 \hat{\tau}_{wall}
 ]
-
-$$
+```
 
 ---
 
 ## 10.2 Flow Field Estimation
 
-$$
-
+```math
 \hat{\mathbf{u}}_f(\mathbf{x},t)
 =
 \mathcal{I}_{\phi}
@@ -1517,13 +1318,11 @@ $$
 \mathbf{r}_{0:t},
 \mathbf{B}_{0:t}
 )
-
-$$
+```
 
 Loss:
 
-$$
-
+```math
 \mathcal{L}_{flow-inv}
 =
 \|
@@ -1541,15 +1340,13 @@ $$
 \|
 \mathcal{R}_{NS}
 \|^2
-
-$$
+```
 
 ---
 
 ## 10.3 Viscosity Estimation
 
-$$
-
+```math
 \hat{\mu}
 =
 \mathcal{I}_{\phi}
@@ -1557,13 +1354,11 @@ $$
 \mathbf{r}_{0:t},
 \mathbf{B}_{0:t}
 )
-
-$$
+```
 
 Loss:
 
-$$
-
+```math
 \mathcal{L}_{\mu}
 =
 |
@@ -1571,8 +1366,7 @@ $$
 -
 \mu
 |^2
-
-$$
+```
 
 ---
 
@@ -1580,8 +1374,7 @@ $$
 
 The environment geometry can be represented by a signed distance function:
 
-$$
-
+```math
 \phi_{\Omega}(\mathbf{x})
 =
 \begin{cases}
@@ -1589,13 +1382,11 @@ $$
 0, & \mathbf{x}\in\partial\Omega \\
 d(\mathbf{x},\partial\Omega), & \mathbf{x}\notin\Omega
 \end{cases}
-
-$$
+```
 
 The inverse model predicts:
 
-$$
-
+```math
 \hat{\phi}_{\Omega}(\mathbf{x})
 =
 \mathcal{I}_{\phi}
@@ -1603,13 +1394,11 @@ $$
 \mathbf{r}_{0:t},
 \mathbf{B}_{0:t}
 )
-
-$$
+```
 
 Loss:
 
-$$
-
+```math
 \mathcal{L}_{geom}
 =
 \|
@@ -1617,15 +1406,13 @@ $$
 -
 \phi_{\Omega}
 \|^2
-
-$$
+```
 
 ---
 
 ## 10.5 Wall Proximity Estimation
 
-$$
-
+```math
 \hat{d}_{wall}(t)
 =
 \mathcal{I}_{\phi}
@@ -1633,13 +1420,11 @@ $$
 \mathbf{r}_{0:t},
 \mathbf{B}_{0:t}
 )
-
-$$
+```
 
 Loss:
 
-$$
-
+```math
 \mathcal{L}_{wall}
 =
 |
@@ -1647,8 +1432,7 @@ $$
 -
 d_{wall}^{true}
 |^2
-
-$$
+```
 
 ---
 
@@ -1656,8 +1440,7 @@ $$
 
 When environmental variables are inferred online:
 
-$$
-
+```math
 \hat{\eta}_t
 =
 [
@@ -1665,13 +1448,11 @@ $$
 \hat{\mathbf{u}}_{f,t},
 \hat{\Omega}_t
 ]
-
-$$
+```
 
 the control problem becomes:
 
-$$
-
+```math
 u^*_{t:t+H}
 =
 \arg\min_{u_{t:t+H}}
@@ -1684,13 +1465,11 @@ u_{t:t+H},
 \hat{\eta}_t
 )
 \right)
-
-$$
+```
 
 subject to:
 
-$$
-
+```math
 \hat{x}_{t:t+H}
 =
 \mathcal{G}_{\theta}
@@ -1699,8 +1478,7 @@ $$
 u_{t:t+H},
 \hat{\eta}_t
 )
-
-$$
+```
 
 This enables adaptive navigation under changing flow or uncertain environmental conditions.
 
@@ -1710,27 +1488,23 @@ This enables adaptive navigation under changing flow or uncertain environmental 
 
 Because the PINO model is differentiable, the gradient of the control objective can be computed as:
 
-$$
-
+```math
 \frac{\partial J}{\partial u_{0:T}}
 =
 \frac{\partial J}{\partial \hat{x}_{0:T}}
 \frac{\partial \hat{x}_{0:T}}{\partial u_{0:T}}
-
-$$
+```
 
 where:
 
-$$
-
+```math
 \hat{x}_{0:T}
 =
 \mathcal{G}_{\theta}
 (
 x_0,u_{0:T}
 )
-
-$$
+```
 
 This allows gradient-based optimization of magnetic control inputs.
 
@@ -1742,33 +1516,28 @@ This allows gradient-based optimization of magnetic control inputs.
 
 Sample candidate control sequences:
 
-$$
-
+```math
 u^{(i)}_{0:T}
 =
 u_{0:T}
 +
 \epsilon^{(i)}_{0:T}
-
-$$
+```
 
 Predict trajectories:
 
-$$
-
+```math
 \hat{x}^{(i)}_{0:T}
 =
 \mathcal{G}_{\theta}
 (
 x_0,u^{(i)}_{0:T}
 )
-
-$$
+```
 
 Evaluate cost:
 
-$$
-
+```math
 J^{(i)}
 =
 J
@@ -1776,8 +1545,7 @@ J
 \hat{x}^{(i)}_{0:T},
 u^{(i)}_{0:T}
 )
-
-$$
+```
 
 Select or weight the best trajectories.
 
@@ -1787,20 +1555,17 @@ Select or weight the best trajectories.
 
 A weighted update can be written as:
 
-$$
-
+```math
 u_{0:T}^{new}
 =
 \sum_{i=1}^{N}
 w_i
 u^{(i)}_{0:T}
-
-$$
+```
 
 where:
 
-$$
-
+```math
 w_i
 =
 \frac{
@@ -1815,8 +1580,7 @@ w_i
 -\frac{1}{\lambda}J^{(j)}
 )
 }
-
-$$
+```
 
 ---
 
@@ -1824,8 +1588,7 @@ $$
 
 ## 14.1 Final Goal Error
 
-$$
-
+```math
 e_{goal}
 =
 \|
@@ -1833,15 +1596,13 @@ e_{goal}
 -
 \mathbf{c}_{goal}
 \|
-
-$$
+```
 
 ---
 
 ## 14.2 Trajectory Tracking Error
 
-$$
-
+```math
 e_{track}
 =
 \frac{1}{T}
@@ -1851,15 +1612,13 @@ e_{track}
 -
 \mathbf{c}_{ref,t}
 \|
-
-$$
+```
 
 ---
 
 ## 14.3 Deformation Prediction Error
 
-$$
-
+```math
 e_{shape}
 =
 \frac{1}{T}
@@ -1869,15 +1628,13 @@ e_{shape}
 -
 \mathbf{r}_t
 \|^2
-
-$$
+```
 
 ---
 
 ## 14.4 Flow Prediction Error
 
-$$
-
+```math
 e_{flow}
 =
 \frac{1}{T}
@@ -1887,45 +1644,38 @@ e_{flow}
 -
 \mathbf{u}_{f,t}
 \|^2
-
-$$
+```
 
 ---
 
 ## 14.5 Control Energy
 
-$$
-
+```math
 E_u
 =
 \sum_{t=0}^{T}
 \|u_t\|^2
-
-$$
+```
 
 ---
 
 ## 14.6 Collision Rate
 
-$$
-
+```math
 R_{collision}
 =
 \frac{N_{collision}}{N_{trials}}
-
-$$
+```
 
 ---
 
 ## 14.7 Success Rate
 
-$$
-
+```math
 R_{success}
 =
 \frac{N_{success}}{N_{trials}}
-
-$$
+```
 
 ---
 
@@ -1933,8 +1683,7 @@ $$
 
 The complete framework can be summarized as:
 
-$$
-
+```math
 \boxed{
 \text{Magnetic Input}
 +
@@ -1946,11 +1695,9 @@ $$
 \rightarrow
 \text{PINO Dynamics Prediction}
 }
+```
 
-$$
-
-$$
-
+```math
 \boxed{
 \text{PINO Prediction}
 \rightarrow
@@ -1958,11 +1705,9 @@ $$
 \rightarrow
 \text{Magnetic Control}
 }
+```
 
-$$
-
-$$
-
+```math
 \boxed{
 \text{Robot Motion}
 +
@@ -1972,13 +1717,11 @@ $$
 \rightarrow
 \text{Environment Inference}
 }
-
-$$
+```
 
 The overall research idea is:
 
-$$
-
+```math
 \boxed{
 \text{Physics-Informed Neural Operator}
 +
@@ -1988,6 +1731,5 @@ $$
 +
 \text{Environmental Inference}
 }
-
-$$
+```
 
