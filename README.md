@@ -667,4 +667,8 @@ This framework connects:
 
 **PINO-MagNav uses a physics-informed neural operator as a differentiable surrogate of magnetic-fluid-soft-body dynamics, enabling predictive control, vision-free navigation, closed-loop adaptation, and environmental inference for magnetically actuated soft robots in fluidic environments.**
 
+## 19.Here are some result images for record-keeping
+**Local displacement prediction under different fluid viscosities
 ![image](https://github.com/xflang96827-ui/Physics-Informed-Neural-Operator-Predictive-Control/blob/main/picture/1.png)
+![image](https://github.com/xflang96827-ui/Physics-Informed-Neural-Operator-Predictive-Control/blob/main/picture/2.png)
+![image](https://github.com/xflang96827-ui/Physics-Informed-Neural-Operator-Predictive-Control/blob/main/picture/3.png)
