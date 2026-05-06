@@ -72,15 +72,15 @@ Develop a neural operator that learns the mapping:
 
 where:
 
-- \(\Omega\) is the fluidic domain,
-- \(\mathbf{u}_f^0\) is the initial flow field,
-- \(\mathbf{B}_{0:T}\) is the magnetic field sequence,
-- \(\nabla \mathbf{B}_{0:T}\) is the magnetic field gradient sequence,
-- \(\theta_{\text{robot}}\) represents robot material and geometric parameters,
-- \(\mathbf{r}_{0:T}\) is the soft robot centerline evolution,
-- \(\mathbf{c}_{0:T}\) is the robot centroid trajectory,
-- \(\mathbf{u}_{f,0:T}\) is the fluid velocity field,
-- \(p_{0:T}\) is the pressure field.
+- $\Omega$ is the fluidic domain,
+- $\mathbf{u}_f^0$ is the initial flow field,
+- $\mathbf{B}_{0:T}$ is the magnetic field sequence,
+- $\nabla \mathbf{B}_{0:T}$ is the magnetic field gradient sequence,
+- $\theta_{\text{robot}}$ represents robot material and geometric parameters,
+- $\mathbf{r}_{0:T}$ is the soft robot centerline evolution,
+- $\mathbf{c}_{0:T}$ is the robot centroid trajectory,
+- $\mathbf{u}_{f,0:T}$ is the fluid velocity field,
+- $p_{0:T}$ is the pressure field.
 
 ---
 
