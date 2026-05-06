@@ -141,18 +141,19 @@ The robot can also serve as a mobile sensor. Its motion and deformation contain 
 An inverse PINO can be used to infer hidden environmental variables:
 
 ```math
-\mathcal{I}_{\phi}:
-[
+\mathcal{I}_{\phi}
+:
+\left[
 \mathbf{r}_{0:t},
 \mathbf{B}_{0:t}
-]
+\right]
 \mapsto
-[
+\left[
 \hat{\mathbf{u}}_f(\mathbf{x}),
 \hat{\mu},
 \hat{\Omega},
-\hat{\tau}_{\text{wall}}
-]
+\hat{\tau}_{\mathrm{wall}}
+\right]
 ```
 
 This enables prediction of:
@@ -411,23 +412,24 @@ The magnetic control input can be defined as:
 ```math
 u_t
 =
-[
-B_x(t),B_y(t),B_z(t),
+\left[
+B_x(t),
+B_y(t),
+B_z(t),
 \partial_x B_x(t),
 \partial_y B_y(t),
 \partial_z B_z(t),
 \omega(t),
 \phi(t)
-]
+\right]
 ```
 
 where:
 
-- \(B_x,B_y,B_z\) are magnetic field components,
-- \(\partial_i B_j\) are field gradient terms,
-- \(\omega(t)\) is actuation frequency,
-- \(\phi(t)\) is actuation phase.
-
+- $(B_x, B_y, B_z)$ are magnetic field components,
+- $\partial_i B_j$ are magnetic field gradient terms,
+- $\omega(t)$ is the actuation frequency,
+- $\phi(t)$ is the actuation phase.
 ---
 
 ## 11. Constraints
@@ -481,7 +483,7 @@ Training data can be generated from simulation and experiments.
 Each trajectory may contain:
 
 ```math
-\{
+\left\{
 \Omega,
 \mathbf{u}_{f,0},
 \mathbf{B}_{0:T},
@@ -490,8 +492,8 @@ Each trajectory may contain:
 \mathbf{c}_{0:T},
 \mathbf{u}_{f,0:T},
 p_{0:T},
-\text{contact}_{0:T}
-\}
+\mathrm{contact}_{0:T}
+\right\}
 ```
 
 Parameter variations should include:
