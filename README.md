@@ -34,9 +34,11 @@ Magnetically actuated soft robots are promising for navigation in confined, flui
 
 However, controlling such robots remains difficult because the system is governed by strongly coupled nonlinear dynamics:
 
-\[
+$$
+
 \text{magnetic field} \leftrightarrow \text{soft robot deformation} \leftrightarrow \text{fluid flow} \leftrightarrow \text{navigation}
-\]
+
+$$
 
 Traditional model-based control is often limited by the high computational cost of fluid-structure interaction simulations. Purely data-driven models may be fast but often fail to generalize outside the training distribution.
 
@@ -60,7 +62,8 @@ This project aims to contribute the following:
 
 Develop a neural operator that learns the mapping:
 
-\[
+$$
+
 \left[
 \Omega,\mathbf{u}_f^0,\mathbf{B}_{0:T},\nabla \mathbf{B}_{0:T},\theta_{\text{robot}}
 \right]
@@ -68,7 +71,8 @@ Develop a neural operator that learns the mapping:
 \left[
 \mathbf{r}_{0:T},\mathbf{c}_{0:T},\mathbf{u}_{f,0:T},p_{0:T}
 \right]
-\]
+
+$$
 
 where:
 
@@ -88,14 +92,16 @@ where:
 
 In deterministic environments, the framework can operate without real-time state feedback by planning a magnetic control sequence in advance:
 
-\[
+$$
+
 u^*_{0:T}
 =
 \arg\min_{u_{0:T}}
 J\left(
 \mathcal{G}_{\theta}(x_0,u_{0:T},\Omega,\mathbf{u}_f)
 \right)
-\]
+
+$$
 
 This mode is suitable for highly controlled environments such as microfluidic chips with known flow conditions and geometry.
 
@@ -105,7 +111,8 @@ This mode is suitable for highly controlled environments such as microfluidic ch
 
 When real-time state measurements are available, the system performs receding-horizon control:
 
-\[
+$$
+
 u^*_{t:t+H}
 =
 \arg\min_{u_{t:t+H}}
@@ -113,11 +120,13 @@ u^*_{t:t+H}
 \ell(\hat{x}_{t+k},u_{t+k})
 +
 \ell_f(\hat{x}_{t+H})
-\]
+
+$$
 
 subject to:
 
-\[
+$$
+
 \hat{x}_{t:t+H}
 =
 \mathcal{G}_{\theta}
@@ -128,7 +137,8 @@ u_{t:t+H},
 \mathbf{u}_f,
 \theta_{\text{robot}}
 )
-\]
+
+$$
 
 Only the first control input is applied, and the optimization is repeated after the next observation.
 
@@ -140,7 +150,8 @@ The robot can also serve as a mobile sensor. Its motion and deformation contain 
 
 An inverse PINO can be used to infer hidden environmental variables:
 
-\[
+$$
+
 \mathcal{I}_{\phi}:
 [
 \mathbf{r}_{0:t},
@@ -153,7 +164,8 @@ An inverse PINO can be used to infer hidden environmental variables:
 \hat{\Omega},
 \hat{\tau}_{\text{wall}}
 ]
-\]
+
+$$
 
 This enables prediction of:
 
@@ -261,37 +273,47 @@ The framework can be studied under different levels of complexity.
 
 The model may take the following inputs:
 
-\[
+$$
+
 \Omega
-\]
+
+$$
 
 environment geometry,
 
-\[
+$$
+
 \mathbf{u}_f(\mathbf{x},0)
-\]
+
+$$
 
 initial flow field,
 
-\[
+$$
+
 \mathbf{B}(\mathbf{x},t)
-\]
+
+$$
 
 magnetic field,
 
-\[
+$$
+
 \nabla \mathbf{B}(\mathbf{x},t)
-\]
+
+$$
 
 magnetic field gradient,
 
-\[
+$$
+
 \theta_{\text{robot}}
 =
 [
 E,\rho_s,M,V,L,A,I
 ]
-\]
+
+$$
 
 robot material and geometric parameters.
 
@@ -301,45 +323,59 @@ robot material and geometric parameters.
 
 The PINO model may predict:
 
-\[
+$$
+
 \mathbf{r}(s,t)
-\]
+
+$$
 
 robot centerline,
 
-\[
+$$
+
 \mathbf{c}(t)
-\]
+
+$$
 
 centroid trajectory,
 
-\[
+$$
+
 \mathbf{u}_f(\mathbf{x},t)
-\]
+
+$$
 
 fluid velocity field,
 
-\[
+$$
+
 p(\mathbf{x},t)
-\]
+
+$$
 
 pressure field,
 
-\[
+$$
+
 \kappa(s,t)
-\]
+
+$$
 
 curvature,
 
-\[
+$$
+
 \mathbf{F}_m(t), \boldsymbol{\tau}_m(t)
-\]
+
+$$
 
 magnetic force and torque,
 
-\[
+$$
+
 \mathbf{F}_{fluid}(t)
-\]
+
+$$
 
 hydrodynamic force.
 
@@ -349,7 +385,8 @@ hydrodynamic force.
 
 The overall training loss is:
 
-\[
+$$
+
 \mathcal{L}_{\mathrm{PINO}}
 =
 \lambda_d\mathcal{L}_{\mathrm{data}}
@@ -363,7 +400,8 @@ The overall training loss is:
 \lambda_b\mathcal{L}_{\mathrm{BC}}
 +
 \lambda_c\mathcal{L}_{\mathrm{constraint}}
-\]
+
+$$
 
 This combines:
 
@@ -380,7 +418,8 @@ This combines:
 
 The navigation cost may be written as:
 
-\[
+$$
+
 J
 =
 \sum_{t=0}^{T}
@@ -398,7 +437,8 @@ J
 \lambda_o
 \sum_{t=0}^{T}
 \Phi_{\mathrm{obs}}(\hat{\mathbf{c}}_t)
-\]
+
+$$
 
 The controller seeks to minimize tracking error, terminal error, control energy, control variation, and obstacle collision risk.
 
@@ -408,7 +448,8 @@ The controller seeks to minimize tracking error, terminal error, control energy,
 
 The magnetic control input can be defined as:
 
-\[
+$$
+
 u_t
 =
 [
@@ -419,7 +460,8 @@ B_x(t),B_y(t),B_z(t),
 \omega(t),
 \phi(t)
 ]
-\]
+
+$$
 
 where:
 
@@ -436,41 +478,51 @@ Typical constraints include:
 
 ### Magnetic Field Limit
 
-\[
+$$
+
 \|\mathbf{B}(t)\|\leq B_{\max}
-\]
+
+$$
 
 ### Magnetic Gradient Limit
 
-\[
+$$
+
 \|\nabla \mathbf{B}(t)\|\leq G_{\max}
-\]
+
+$$
 
 ### Frequency Limit
 
-\[
+$$
+
 \omega_{\min}
 \leq
 \omega(t)
 \leq
 \omega_{\max}
-\]
+
+$$
 
 ### Obstacle Avoidance
 
-\[
+$$
+
 d(\mathbf{c}_t,\mathcal{O})
 \geq
 d_{\min}
-\]
+
+$$
 
 ### Deformation Limit
 
-\[
+$$
+
 \kappa(s,t)
 \leq
 \kappa_{\max}
-\]
+
+$$
 
 ---
 
@@ -480,7 +532,8 @@ Training data can be generated from simulation and experiments.
 
 Each trajectory may contain:
 
-\[
+$$
+
 \{
 \Omega,
 \mathbf{u}_{f,0},
@@ -492,7 +545,8 @@ Each trajectory may contain:
 p_{0:T},
 \text{contact}_{0:T}
 \}
-\]
+
+$$
 
 Parameter variations should include:
 
@@ -555,7 +609,7 @@ The framework can be evaluated using:
 
 ---
 
-## 15. Repository Structure
+## 15. Suggested Repository Structure
 
 ```text
 PINO-MagNav/
