@@ -609,7 +609,7 @@ The framework can be evaluated using:
 
 ---
 
-## 15. Suggested Repository Structure
+## 15. Repository Structure
 
 ```text
 PINO-MagNav/
