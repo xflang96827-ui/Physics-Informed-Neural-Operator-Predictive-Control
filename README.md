@@ -667,8 +667,46 @@ This framework connects:
 
 **PINO-MagNav uses a physics-informed neural operator as a differentiable surrogate of magnetic-fluid-soft-body dynamics, enabling predictive control, vision-free navigation, closed-loop adaptation, and environmental inference for magnetically actuated soft robots in fluidic environments.**
 
+---
+
 ## 19.Here are some result images for record-keeping
-**Local displacement prediction under different fluid viscosities
+
+---
+
+1.Local displacement prediction under different fluid viscosities
 ![image](https://github.com/xflang96827-ui/Physics-Informed-Neural-Operator-Predictive-Control/blob/main/picture/1.png)
 ![image](https://github.com/xflang96827-ui/Physics-Informed-Neural-Operator-Predictive-Control/blob/main/picture/2.png)
 ![image](https://github.com/xflang96827-ui/Physics-Informed-Neural-Operator-Predictive-Control/blob/main/picture/3.png)
+
+---
+
+2.Predicted dipole displacement under different fluid viscosities
+![image](https://github.com/xflang96827-ui/Physics-Informed-Neural-Operator-Predictive-Control/blob/main/picture/4.gif)
+![image](https://github.com/xflang96827-ui/Physics-Informed-Neural-Operator-Predictive-Control/blob/main/picture/5.gif)
+![image](https://github.com/xflang96827-ui/Physics-Informed-Neural-Operator-Predictive-Control/blob/main/picture/6.gif)
+
+---
+
+3.Velocity and displacement of soft robots
+![image](https://github.com/xflang96827-ui/Physics-Informed-Neural-Operator-Predictive-Control/blob/main/picture/7.png)
+
+---
+
+4.Local flow field variation records, vorticity field records, velocity records
+![image](https://github.com/xflang96827-ui/Physics-Informed-Neural-Operator-Predictive-Control/blob/main/picture/8.png)
+![image](https://github.com/xflang96827-ui/Physics-Informed-Neural-Operator-Predictive-Control/blob/main/picture/9.png)
+
+---
+
+5.Environmental flow superposition effects
+![image](https://github.com/xflang96827-ui/Physics-Informed-Neural-Operator-Predictive-Control/blob/main/picture/11.png)
+
+---
+
+6.The superimposed effects of environmental flow (multiple dipole arrangement)
+![image](https://github.com/xflang96827-ui/Physics-Informed-Neural-Operator-Predictive-Control/blob/main/picture/12.png)
+
+---
+
+7.Future 3D Framework
+![image](https://github.com/xflang96827-ui/Physics-Informed-Neural-Operator-Predictive-Control/blob/main/picture/13.png)
