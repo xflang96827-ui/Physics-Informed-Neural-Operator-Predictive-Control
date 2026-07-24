@@ -729,6 +729,61 @@ The current framework integrates:
 
 The neural-operator configuration used in this stage has 16 retained Fourier modes, 96 frequency-domain channels, four spectral layers, an autoregressive horizon of 64 time steps, and 41 spatial discretization points.
 
+### Method
+
+#### 1. Bidirectional FSI simulation and data generation
+
+OpenFOAM solves the fluid domain, SOFA solves the deformable continuum-robot model, and preCICE synchronizes the two solvers during time stepping. The coupled workflow captures both directions of interaction: robot motion changes the surrounding flow, and the resulting fluid response changes the robot dynamics. Simulation trajectories provide time-aligned sequences of robot configuration, flow response, and control input for neural-operator training.
+
+#### 2. PINO surrogate with an FNO backbone
+
+The surrogate first lifts the low-dimensional physical inputs into a 96-channel latent representation. Each of its four spectral layers follows the sequence
+
+$$
+\text{Fourier transform}
+\rightarrow
+\text{learned spectral multiplication}
+\rightarrow
+\text{inverse Fourier transform}
+\rightarrow
+\text{activation}.
+$$
+
+Only the first 16 low-frequency Fourier modes are retained, which concentrates the representation on the dominant spatial dynamics and filters high-frequency numerical noise. The state is represented at 41 spatial points. Starting from the current coupled state and a candidate control sequence, the model performs an autoregressive rollout of up to 64 time steps:
+
+$$
+\hat{\mathbf{x}}_{t+1:t+H}
+=
+\mathcal{G}_{\theta}
+\left(
+\mathbf{x}_{t},
+\mathbf{u}_{t:t+H-1}
+\right).
+$$
+
+Here, $\mathbf{x}_{t}$ contains the continuum-robot and flow state used by the controller, $\mathbf{u}_{t:t+H-1}$ is the candidate actuation sequence, and $\mathcal{G}_{\theta}$ is the learned PINO surrogate.
+
+#### 3. PINO-MPC closed-loop control
+
+At every control step, MPC uses the PINO surrogate to evaluate the future consequences of candidate control sequences. The optimizer minimizes a task-specific objective while accounting for the predicted coupled response:
+
+$$
+\mathbf{u}_{t:t+H-1}^{*}
+=
+\arg\min_{\mathbf{u}_{t:t+H-1}}
+J_{\mathrm{task}}
+\left(
+\hat{\mathbf{x}}_{t+1:t+H},
+\mathbf{u}_{t:t+H-1}
+\right).
+$$
+
+Only the first action of the optimized sequence is applied. The coupled state is then updated, the prediction horizon moves forward, and the optimization is repeated. The task objective changes with the experiment: entering and holding a target band, producing flow-mediated object displacement, passing through a ring aperture, or tracking a spatial figure-eight path.
+
+#### 4. Evaluation protocol
+
+The method is evaluated on two-dimensional and three-dimensional closed-loop tasks. The reported figures show robot configuration, predicted or simulated flow quantities, geometric task checks, and reference-versus-realized trajectories. All results in this update are obtained in the coupled simulation environment.
+
 ### Closed-loop simulation results
 
 All four tasks below were completed using the PINO surrogate inside the MPC closed loop.
