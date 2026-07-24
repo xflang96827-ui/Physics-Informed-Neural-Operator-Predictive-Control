@@ -712,3 +712,122 @@ This framework connects:
 
 7.Future 3D Framework
 ![image](https://github.com/xflang96827-ui/Physics-Informed-Neural-Operator-Predictive-Control/blob/main/picture/13.png)
+
+---
+
+## 20. July 2026 Update: FSI-CTRL for Continuum Robots
+
+This update records a new stage of the project: **learning and closed-loop control of continuum robots under fluid-structure interaction**.
+
+### Completed simulation framework
+
+The current framework integrates:
+
+- a bidirectional **OpenFOAM-preCICE-SOFA** fluid-structure interaction workflow for coupled simulation and data generation;
+- a **PINO surrogate model with an FNO backbone** for autoregressive prediction of the coupled dynamics;
+- a receding-horizon **model predictive controller**, which uses PINO rollouts to evaluate future states and select control actions.
+
+The neural-operator configuration used in this stage has 16 retained Fourier modes, 96 frequency-domain channels, four spectral layers, an autoregressive horizon of 64 time steps, and 41 spatial discretization points.
+
+### Method
+
+#### 1. Bidirectional FSI simulation and data generation
+
+OpenFOAM solves the fluid domain, SOFA solves the deformable continuum-robot model, and preCICE synchronizes the two solvers during time stepping. The coupled workflow captures both directions of interaction: robot motion changes the surrounding flow, and the resulting fluid response changes the robot dynamics. Simulation trajectories provide time-aligned sequences of robot configuration, flow response, and control input for neural-operator training.
+
+#### 2. PINO surrogate with an FNO backbone
+
+The surrogate first lifts the low-dimensional physical inputs into a 96-channel latent representation. Each of its four spectral layers follows the sequence
+
+$$
+\text{Fourier transform}
+\rightarrow
+\text{learned spectral multiplication}
+\rightarrow
+\text{inverse Fourier transform}
+\rightarrow
+\text{activation}.
+$$
+
+Only the first 16 low-frequency Fourier modes are retained, which concentrates the representation on the dominant spatial dynamics and filters high-frequency numerical noise. The state is represented at 41 spatial points. Starting from the current coupled state and a candidate control sequence, the model performs an autoregressive rollout of up to 64 time steps:
+
+$$
+\hat{\mathbf{x}}_{t+1:t+H}
+=
+\mathcal{G}_{\theta}
+\left(
+\mathbf{x}_{t},
+\mathbf{u}_{t:t+H-1}
+\right).
+$$
+
+Here, $\mathbf{x}_{t}$ contains the continuum-robot and flow state used by the controller, $\mathbf{u}_{t:t+H-1}$ is the candidate actuation sequence, and $\mathcal{G}_{\theta}$ is the learned PINO surrogate.
+
+#### 3. PINO-MPC closed-loop control
+
+At every control step, MPC uses the PINO surrogate to evaluate the future consequences of candidate control sequences. The optimizer minimizes a task-specific objective while accounting for the predicted coupled response:
+
+$$
+\mathbf{u}_{t:t+H-1}^{*}
+=
+\arg\min_{\mathbf{u}_{t:t+H-1}}
+J_{\mathrm{task}}
+\left(
+\hat{\mathbf{x}}_{t+1:t+H},
+\mathbf{u}_{t:t+H-1}
+\right).
+$$
+
+Only the first action of the optimized sequence is applied. The coupled state is then updated, the prediction horizon moves forward, and the optimization is repeated. The task objective changes with the experiment: entering and holding a target band, producing flow-mediated object displacement, passing through a ring aperture, or tracking a spatial figure-eight path.
+
+#### 4. Evaluation protocol
+
+The method is evaluated on two-dimensional and three-dimensional closed-loop tasks. The reported figures show robot configuration, predicted or simulated flow quantities, geometric task checks, and reference-versus-realized trajectories. All results in this update are obtained in the coupled simulation environment.
+
+### Closed-loop simulation results
+
+All four tasks below were completed using the PINO surrogate inside the MPC closed loop.
+
+#### 20.1 Two-dimensional target reaching
+
+The controller moves the continuum robot from its initial straight configuration into a prescribed target band while accounting for the surrounding flow response.
+
+| Start | Approach |
+| --- | --- |
+| ![Initial state of the 2D target-reaching task](results/fsi-ctrl-july-2026/2d-target-start.png) | ![Robot approaching the target band](results/fsi-ctrl-july-2026/2d-target-approach.png) |
+
+| Target-band entry | Hold and relaxation |
+| --- | --- |
+| ![Robot entering the target band](results/fsi-ctrl-july-2026/2d-target-entry.png) | ![Robot holding near the target after fluid relaxation](results/fsi-ctrl-july-2026/2d-target-hold.png) |
+
+#### 20.2 Contact-free object displacement through the flow field
+
+The controller steers the continuum robot to generate a flow field that displaces a separate object without direct contact. The simulated object-center displacement is approximately 8.2 mm.
+
+| Flow field and object motion | Local fluid load | Object displacement |
+| --- | --- | --- |
+| ![Flow field generated by the robot and resulting object motion](results/fsi-ctrl-july-2026/2d-object-flow-and-motion.png) | ![Local fluid load acting on the object](results/fsi-ctrl-july-2026/2d-object-local-load.png) | ![Simulated displacement of the non-contact object](results/fsi-ctrl-july-2026/2d-object-displacement.png) |
+
+#### 20.3 Three-dimensional ring traversal
+
+The three-dimensional controller guides the continuum-robot centerline through a prescribed ring aperture. The crossing check records the centerline position relative to the ring plane and aperture, while local flow slices show the fluid response before, during, and after traversal.
+
+| Traversal geometry | Crossing check |
+| --- | --- |
+| ![Continuum robot passing through the ring aperture](results/fsi-ctrl-july-2026/3d-ring-threaded-state.png) | ![Ring-plane crossing and aperture check](results/fsi-ctrl-july-2026/3d-ring-crossing-check.png) |
+
+![Local flow before, during, and after ring traversal](results/fsi-ctrl-july-2026/3d-ring-flow-stages.png)
+
+#### 20.4 Three-dimensional figure-eight trajectory tracking
+
+The controller tracks a spatial figure-eight reference near the prescribed flow region. The result records the simulated tip trajectory together with representative local flow slices during the ramp, crossing, and second-lobe stages.
+
+| Spatial trajectory | Tip-path tracking |
+| --- | --- |
+| ![Three-dimensional robot trajectory and local flow slice](results/fsi-ctrl-july-2026/3d-eight-path-and-flow.png) | ![Reference and simulated figure-eight tip paths](results/fsi-ctrl-july-2026/3d-eight-path-tracking.png) |
+
+![Local flow during the figure-eight tracking task](results/fsi-ctrl-july-2026/3d-eight-flow-stages.png)
+
+### Current validation boundary
+
+These results demonstrate the completed OpenFOAM-preCICE-SOFA, PINO, and MPC workflow in simulation. They do **not** yet constitute validation on a physical continuum-robot platform. The next stage is to improve control performance and test the framework in a concrete experimental system.
